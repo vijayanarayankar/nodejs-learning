@@ -14,14 +14,25 @@ app.get('/login' , function(req , res) {
 	res.sendFile('public/files/login.html',{root:__dirname});
 });
 
-app.post('/login' , function(req,res){
-	//res.end(JSON.stringify(req.body));
-	session=req.session;
-	//if(req.body.username == 'admin' && req.body.pass == 'admin'){
-		session.UniqueID=req.body.username;
-	//}
+app.get('/loginOp' , function(req,res){
+	//res.end(JSON.stringify(req.body));get
 	
-	res.redirect('/redirects');
+	session=req.session;
+	console.log(session);
+	var name=req.query.username;
+	var pass=req.query.pass;
+    console.log(JSON.stringify(req.query));
+	console.log("name is:"+name+ pass);
+	if(name == 'admin' && pass == 'admin'){
+		console.log("message");
+		session.UniqueID=req.query.username;
+		res.redirect('/redirects');
+	}
+	else{
+		res.send(req.session.UniqueID +'Who r u?');
+	}
+	
+	
 });
 
 app.get('/admin' , function(req,res){
@@ -34,9 +45,7 @@ app.get('/redirects' , function(req,res){
 		console.log(session.UniqueID);
 		res.redirect('/admin');
 	}
-		else{
-			res.send(req.session.UniqueID +'Who r u?');
-		}
+		
 	
 });
 
