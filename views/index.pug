@@ -1,0 +1,35 @@
+doctype html
+html(lang="en")
+  head
+    title= pageTitle
+    link(rel='stylesheet' href='/bower-components/bootstrap/dist/css/bootstrap.css')
+    link(rel='stylesheet' href='/css/style.css')
+  body
+  nav.navbar.navbar-expand-md.navbar-dark.bg-dark
+   a.navbar-brand(href='#') Navbar
+   button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarsExampleDefault', aria-controls='navbarsExampleDefault', aria-expanded='false', aria-label='Toggle navigation')
+    span.navbar-toggler-icon
+   #navbarsExampleDefault.collapse.navbar-collapse
+    ul.navbar-nav.mr-auto
+     li.nav-item.active
+      a.nav-link(href='/')
+       | Home 
+       span.sr-only (current)
+     li.nav-item
+      a.nav-link(href='/articles/add') Add Article
+   
+  .container
+    != messages('message', locals) 
+    h1 #{title}
+     ul.list-group
+    each article,i in articless
+     li.list-group-item 
+      a(href="/articles/"+article.id)=article.title
+
+
+script(src='bower-components/jquery/dist/jquery.js')
+script(src='bower-components/bootstrap/dist/js/bootstrap.js')
+script(src='js/main.js')
+
+     
+    
